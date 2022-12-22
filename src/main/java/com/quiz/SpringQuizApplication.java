@@ -14,7 +14,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 //임시로 DB설정을 안볼 때
 //@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 
-@MapperScan(basePackages = "com.example.*") // mapper scan 추가!!!(DAO를 찾는 어노테이션)
+@MapperScan(basePackages = "com.quiz.*") // mapper scan 추가!!!(DAO를 찾는 어노테이션)
 @SpringBootApplication
 public class SpringQuizApplication {
 
