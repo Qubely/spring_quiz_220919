@@ -19,4 +19,44 @@
 		WHERE
 			`id` = #{id}
  	</select>
+ 	
+ 	<select id="selectRentPriceList" resultType="com.quiz.lesson03.model.RealEstate">
+ 		SELECT
+ 			`id`
+			,`realtorId`
+			,`address`
+			,`area`
+			,`type`
+			,`price`
+			,`rentPrice`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`real_estate`
+		WHERE
+			<![CDATA[`rentPrice` < #{rentPrice}]]>
+ 	</select>
+ 	
+ 	<select id="selectTypeAreaPriceList" resultType="com.quiz.lesson03.model.RealEstate">
+ 		SELECT
+ 			`id`
+			,`realtorId`
+			,`address`
+			,`area`
+			,`type`
+			,`price`
+			,`rentPrice`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`real_estate`
+		WHERE
+			`type` = '매매'
+			 AND <![CDATA[`area` >= #{area}]]> 
+			 AND <![CDATA[`price` <= #{price}]]>
+		ORDER BY
+			`createdAt`
+		DESC
+ 	</select>
+ 	
  </mapper>
