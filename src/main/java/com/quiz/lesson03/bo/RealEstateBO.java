@@ -14,16 +14,24 @@ public class RealEstateBO {
 	@Autowired
 	private RealEstateDAO realEstateDAO;
 	
-	public RealEstate getRealEstate(int id) {
-		return realEstateDAO.selsctRealEstate(id);
+	public RealEstate getRealEstateById(int id) {
+		return realEstateDAO.selsctRealEstateById(id);
 	}
 	
-	public List<RealEstate> getRentPriceList(int rentPrice) {
-		return realEstateDAO.selectRentPriceList(rentPrice);
+	public List<RealEstate> getRealEstateListByRentPrice(int rentPrice) {
+		return realEstateDAO.selectRealEstateListByRentPrice(rentPrice);
 	}
 	
-	public List<RealEstate> getTypeAreaPriceList(int area, int price) {
-		return realEstateDAO.selectTypeAreaPriceList(area, price);
+	public List<RealEstate> getRealEstateListByAreaPrice(int area, int price) {
+		return realEstateDAO.selectRealEstateListByAreaPrice(area, price);
 	}
 	
+	public int addRealEstate(RealEstate realEstate) {
+		return realEstateDAO.insertRealEstate(realEstate);
+	}
+	
+	// addRealEstateAsField(realtorId, "썅떼빌리버 오피스텔 814호", 45, "월세", 100000, 120)
+	public int addRealEstateAsField(int realtorId, String address, int area, String type, int price, Integer rentPrice) {
+		return realEstateDAO.insertRealEstateAsField(realtorId, address, area, type, price, rentPrice);
+	}
 }

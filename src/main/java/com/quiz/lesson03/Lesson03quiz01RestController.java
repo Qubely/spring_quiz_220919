@@ -20,14 +20,14 @@ public class Lesson03quiz01RestController {
 	public RealEstate quiz01_1(
 			@RequestParam(value="id", defaultValue="1") int id
 			) {
-		return realEstateBO.getRealEstate(id);
+		return realEstateBO.getRealEstateById(id);
 	}
 	
 	@RequestMapping("/lesson03/quiz01/2")
 	public List<RealEstate> quiz01_2(
 			@RequestParam(value="rentPrice", defaultValue="1000") int rentPrice
 			) {
-		return realEstateBO.getRentPriceList(rentPrice);
+		return realEstateBO.getRealEstateListByRentPrice(rentPrice);
 	}
 	
 	@RequestMapping("/lesson03/quiz01/3")
@@ -35,7 +35,7 @@ public class Lesson03quiz01RestController {
 			@RequestParam(value="area", defaultValue="10") int area,
 			@RequestParam(value="price", defaultValue="1000000") int price
 			) {
-		return realEstateBO.getTypeAreaPriceList(area, price);
+		return realEstateBO.getRealEstateListByAreaPrice(area, price);
 	}
 	
 }
