@@ -11,7 +11,7 @@ import com.quiz.lesson03.bo.RealEstateBO;
 import com.quiz.lesson03.model.RealEstate;
 
 @RestController
-public class Lesson03quiz01RestController {
+public class Lesson03Quiz01RestController {
 	
 	@Autowired
 	private RealEstateBO realEstateBO;
