@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.quiz.lesson04.dao.SellerDAO;
+import com.quiz.lesson04.model.Seller;
 
 @Service
 public class SellerBO {
@@ -15,4 +16,11 @@ public class SellerBO {
 		sellerDAO.insertSeller(nickname, profileImageUrl, temperature);
 	}
 	
+	public Seller getLatestSeller() {
+		return sellerDAO.getLatestSeller();
+	}
+	
+	public Seller getSellerById(int id) {
+		return sellerDAO.getSellerById(id);
+	}
 }
