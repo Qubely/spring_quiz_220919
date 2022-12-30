@@ -12,7 +12,7 @@ public class RealtorBO {
 	@Autowired
 	private RealtorDAO realtorDAO;
 	
-	public void insertRealtor(Realtor realtor) {
+	public void addRealtor(Realtor realtor) {
 		realtorDAO.insertRealtor(realtor);
 	}
 	
