@@ -5,11 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.quiz.lesson05.bo.WeatherHistoryBO;
 import com.quiz.lesson05.model.Member;
 
 @RequestMapping("/lesson05")
@@ -128,6 +132,8 @@ public class Lesson05QuizController {
 		return "lesson05/quiz03";
 	}
 	
+	
+	// http://localhost:8080/lesson05/quiz04
 	@GetMapping("/quiz04")
 	public String quiz04(Model model) {
 		List<Member> members = new ArrayList<>();
@@ -183,6 +189,37 @@ public class Lesson05QuizController {
 		model.addAttribute("members", members);
 		
 		return "lesson05/quiz04";
+	}
+	
+	
+	
+	// http://localhost:8080/lesson05/quiz05
+	@Autowired()
+	private WeatherHistoryBO weatherHistoryBO;
+	@GetMapping("/quiz05")
+	public String quiz05(Model model) {
+		
+		model.addAttribute("weatherHistoryList", weatherHistoryBO.getWeatherHistoryList());
+		
+		return "lesson05/quiz05";
+	}
+	
+	@GetMapping("/quiz05_1")
+	public String quiz05_1() {
+		return "lesson05/quiz05_1";
+	}
+	
+	@PostMapping("/add_weatherHistory")
+	public String addWeatherHistory(
+			@RequestParam("date") String date,
+			@RequestParam("weather") String weather,
+			@RequestParam("microDust") String microDust,
+			@RequestParam("temperatures") double temperatures,
+			@RequestParam("precipitation") double precipitation,
+			@RequestParam("windSpeed") double windSpeed
+			) {
+		weatherHistoryBO.addWeatherHistory(date, weather, microDust, temperatures, precipitation, windSpeed);
+		return "redirect:/lesson05/quiz05";
 	}
 	
 }

@@ -1,2 +1,6 @@
 @charset "UTF-8";
-body {background-color:#999;}
+/* #wrap {width:auto;} */
+aside {background-color:rgb(79, 134, 252);}
+a, a:hover {text-decoration:none; color:white; font-weight:bold; font-size:20px;}
+.nav-item:hover {background-color:rgb(52, 90, 172);}
+section {min-height:400px;}
