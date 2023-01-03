@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.quiz.lesson02.bo.StoreBO;
+import com.quiz.lesson02.model.Store;
 import com.quiz.lesson05.bo.WeatherHistoryBO;
 import com.quiz.lesson05.model.Member;
 import com.quiz.lesson05.model.WeatherHistory;
@@ -225,5 +227,18 @@ public class Lesson05QuizController {
 		weatherHistoryBO.addWeatherHistory(date, weather, microDust, temperatures, precipitation, windSpeed);
 		return "redirect:/lesson05/quiz05";
 	}
+	
+	
+	// http://localhost:8080/lesson05/store_list
+	
+	@Autowired
+	private StoreBO storeBO;
+	
+	@GetMapping("/store_list")
+	public String storeListView(Model model) {
+		List<Store> storeList = storeBO.getStoreList();
+		return "lesson05/quiz06/storeListView";
+	}
+	
 	
 }
