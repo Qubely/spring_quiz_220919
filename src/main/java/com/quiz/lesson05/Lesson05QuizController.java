@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.quiz.lesson05.bo.WeatherHistoryBO;
 import com.quiz.lesson05.model.Member;
+import com.quiz.lesson05.model.WeatherHistory;
 
 @RequestMapping("/lesson05")
 @Controller
@@ -199,7 +200,10 @@ public class Lesson05QuizController {
 	@GetMapping("/quiz05")
 	public String quiz05(Model model) {
 		
-		model.addAttribute("weatherHistoryList", weatherHistoryBO.getWeatherHistoryList());
+		List<WeatherHistory> weatherHistoryList = weatherHistoryBO.getWeatherHistoryList();
+		model.addAttribute("weatherHistoryList", weatherHistoryList);
+		
+//		model.addAttribute("weatherHistoryList", weatherHistoryBO.getWeatherHistoryList());
 		
 		return "lesson05/quiz05";
 	}
