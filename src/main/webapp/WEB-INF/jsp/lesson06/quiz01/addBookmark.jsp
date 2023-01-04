@@ -44,6 +44,10 @@
 					alert("url 주소를 입력하세요");
 					return;
 				}
+				if (url.substring(0, 4) != "http" || url.substring(0, 5) != "https") {
+					alert("http 또는 https로 시작하도록 입력하세요");
+					return;
+				}
 				
 				$.ajax({
 					
