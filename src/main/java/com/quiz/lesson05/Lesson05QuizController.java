@@ -1,11 +1,13 @@
 package com.quiz.lesson05;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -217,7 +219,9 @@ public class Lesson05QuizController {
 	
 	@PostMapping("/add_weatherHistory")
 	public String addWeatherHistory(
-			@RequestParam("date") String date,
+			@RequestParam("date") String date, // String으로 인서트 해도 DB에서는 date타입으로 잘 저장된다.
+//			ModelAttribute 사용 시 model 패키지 안의 클래스에 @DateTimeFormat(pattern="yyyy-MM-dd")어노테이션 사용
+//			@RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd") Date date,
 			@RequestParam("weather") String weather,
 			@RequestParam("microDust") String microDust,
 			@RequestParam("temperatures") double temperatures,

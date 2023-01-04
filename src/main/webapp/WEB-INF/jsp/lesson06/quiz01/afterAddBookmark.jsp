@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>배탈의 민족</title>
+<title>즐겨찾기 목록</title>
 
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 
@@ -15,24 +15,29 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" type="text/css" href="/css/lesson05/quiz06/style.css">
-
 </head>
 <body>
-
-	<div id="wrap" class="container">
-		<header>
-			<div id="logo">
-				배탈의 민족
-			</div>
-		</header>
-		<section>
-			
-		</section>
-		<footer>
-			
-		</footer>
+	
+	<div class="container">
+		<table class="table text-center">
+			<thead>
+				<tr>
+					<th>No.</th>
+					<th>이름</th>
+					<th>주소</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="bookmark" items="${bookmarkList}" vatStatus="status">
+					<tr>
+						<td>${status.count}</td>
+						<td>${bookmark.name}</td>
+						<td>${bookmark.url}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
-
+	
 </body>
 </html>
