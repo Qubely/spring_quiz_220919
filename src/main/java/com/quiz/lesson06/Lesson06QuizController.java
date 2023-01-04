@@ -40,11 +40,12 @@ public class Lesson06QuizController {
 		return "성공";
 	}
 	
+	// http://localhost:8080/lesson06/quiz01/after_add_bookmark
 	@GetMapping("/quiz01/after_add_bookmark")
 	public String afterAddBookmark(Model model) {
 		List<Bookmark> bookmarkList = bookmarkBO.getBookmarkList();
 		model.addAttribute("bookmarkList", bookmarkList);
-		return "lesson06/afterAddBookmark";
+		return "lesson06/quiz01/afterAddBookmark";
 	}
 	
 }

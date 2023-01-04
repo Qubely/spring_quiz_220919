@@ -19,6 +19,7 @@
 <body>
 	
 	<div class="container">
+		<h1>즐겨찾기 목록</h1>
 		<table class="table text-center">
 			<thead>
 				<tr>
@@ -28,7 +29,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="bookmark" items="${bookmarkList}" vatStatus="status">
+				<c:forEach var="bookmark" items="${bookmarkList}" varStatus="status">
 					<tr>
 						<td>${status.count}</td>
 						<td>${bookmark.name}</td>

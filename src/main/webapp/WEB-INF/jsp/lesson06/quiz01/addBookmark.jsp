@@ -55,6 +55,7 @@
 					// response
 					, success:function(data) {
 						alert(data);
+						location.href = "/lesson06/quiz01/after_add_bookmark"
 					}
 					, error:function(e) {
 						alert("에러");
