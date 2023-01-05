@@ -23,7 +23,11 @@
 		</div>
 		<div class="form-group">
 			<label for="url">주소</label>
-			<input type="text" id="url" name="url" class="form-control col-12">
+			<div class="d-flex">
+				<input type="text" id="url" name="url" class="form-control col-11">
+				<button type="button" id="urlCheckBtn" class="btn btn-info ml-2">중복확인</button>
+			</div>
+			<small id="urlStatusArea"></small>
 		</div>
 		<button type="button" id="join" class="btn btn-success col-12">추가</button>
 	</div>
@@ -44,10 +48,11 @@
 					alert("url 주소를 입력하세요");
 					return;
 				}
-				if (url.substring(0, 4) != "http" && url.substring(0, 5) != "https") {
+				if (url.startsWith("https") == false && url.startsWith("http") == false) {
 					alert("http 또는 https로 시작하도록 입력하세요");
 					return;
 				}
+				
 				
 				$.ajax({
 					
@@ -57,18 +62,58 @@
 					, data:{"name":name, "url":url}
 					
 					// response
-					, success:function(data) {
-						alert(data);
-						location.href = "/lesson06/quiz01/after_add_bookmark"
+					, success:function(data) {	// String JSON => object
+						// alert(data);
+						if (data.result == "성공") {
+							location.href = "/lesson06/quiz01/after_add_bookmark"
+						}
 					}
 					, error:function(e) {
-						alert("에러");
+						alert("에러" + e);
 					}
-					
 					
 				});
 				
 			});
+			
+			
+			$('#urlCheckBtn').on("click", function() {
+				let url = $('#url').val().trim();
+				
+				$('#urlStatusArea').empty();
+				
+				if (url.length == "") {
+					$('#urlStatusArea').append('<span class="text-danger">url을 입력하세요</span>');
+					return;
+				}
+				
+				if (url.startsWith("https") == false && url.startsWith("http") == false) {
+					$('#urlStatusArea').append('<span class="text-danger">http 또는 https로 시작하도록 입력하세요</span>');
+					return;
+				}
+				
+				$.ajax({
+					// request
+					type:"get"
+					, url:"/lesson06/quiz01/is_duplication"
+					, data:{"url":url}
+					
+					// response
+					, success:function(data) {
+						if (data.is_duplication) {
+							$('#urlStatusArea').append('<span class="text-danger">중복된 url 입니다.</span>');
+						} else {
+							$('#urlStatusArea').append('<span class="text-primary">저장 가능한 url 입니다.</span>');
+						}
+					}
+					, error:function(e) {
+						alert("실패" + e);
+					}
+					
+				});
+				
+			});
+			
 			
 		});
 	</script>

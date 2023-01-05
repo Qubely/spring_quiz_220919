@@ -26,6 +26,7 @@
 					<th>No.</th>
 					<th>이름</th>
 					<th>주소</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -34,11 +35,26 @@
 						<td>${status.count}</td>
 						<td>${bookmark.name}</td>
 						<td>${bookmark.url}</td>
+						<td><button type="button" class="deleteBtn btn btn-danger">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
+	
+	<script>
+		
+		$(document).ready(function() {
+			
+			$('.deleteBtn').on("click", function() {
+				
+				alert();
+				
+			});
+			
+		});
+		
+	</script>
 	
 </body>
 </html>

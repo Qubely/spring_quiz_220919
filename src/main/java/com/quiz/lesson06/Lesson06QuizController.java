@@ -1,6 +1,8 @@
 package com.quiz.lesson06;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +31,7 @@ public class Lesson06QuizController {
 	
 	@ResponseBody
 	@PostMapping("/quiz01/add_bookmark")
-	public String addBookmark(
+	public Map<String, String> addBookmark(
 			@RequestParam("name") String name,
 			@RequestParam("url") String url
 			) {
@@ -37,7 +39,11 @@ public class Lesson06QuizController {
 		// db insert
 		bookmarkBO.addBookmark(name, url);
 		
-		return "성공";
+		// 성공 값 응답 값
+		Map<String, String> result = new HashMap<>();
+		result.put("result", "성공");
+		
+		return result;	// jackson => JSON String
 	}
 	
 	// http://localhost:8080/lesson06/quiz01/after_add_bookmark
@@ -46,6 +52,18 @@ public class Lesson06QuizController {
 		List<Bookmark> bookmarkList = bookmarkBO.getBookmarkList();
 		model.addAttribute("bookmarkList", bookmarkList);
 		return "lesson06/quiz01/afterAddBookmark";
+	}
+	
+	@ResponseBody
+	@GetMapping("/quiz01/is_duplication")
+	public Map<String, Boolean> isDuplication(
+			@RequestParam("url") String url
+			) {
+		
+		Map<String, Boolean> result = new HashMap<>();
+		result.put("is_duplication", bookmarkBO.existBookmarkByUrl(url));
+		return result;
+		
 	}
 	
 }

@@ -22,4 +22,8 @@ public class BookmarkBO {
 		return bookmarkDAO.selectBookmarkList();
 	}
 	
+	public boolean existBookmarkByUrl(String url) {
+		return bookmarkDAO.existBookmarkByUrl(url);
+	}
+	
 }

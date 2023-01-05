@@ -30,4 +30,13 @@
 		FROM
 			`bookmark`
 	</select>
+	
+	<select id="existBookmarkByUrl" parameterType="string" resultType="boolean">
+		SELECT
+			COUNT(*)
+		FROM
+			`bookmark`
+		WHERE
+			`url` = #{url}
+	</select>
 </mapper>
