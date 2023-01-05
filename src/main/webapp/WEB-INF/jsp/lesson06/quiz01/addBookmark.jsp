@@ -95,7 +95,7 @@
 				$.ajax({
 					// request
 					type:"get"
-					, url:"/lesson06/quiz01/is_duplication"
+					, url:"/lesson06/quiz02/is_duplication"
 					, data:{"url":url}
 					
 					// response

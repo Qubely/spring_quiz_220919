@@ -55,13 +55,25 @@ public class Lesson06QuizController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/quiz01/is_duplication")
+	@GetMapping("/quiz02/is_duplication")
 	public Map<String, Boolean> isDuplication(
 			@RequestParam("url") String url
 			) {
 		
 		Map<String, Boolean> result = new HashMap<>();
 		result.put("is_duplication", bookmarkBO.existBookmarkByUrl(url));
+		return result;
+		
+	}
+	
+	@ResponseBody
+	@PostMapping("quiz02/is_deleted")
+	public Map<String, Boolean> isDeleted(
+			@RequestParam("id") int id
+			) {
+		
+		Map<String, Boolean> result = new HashMap<>();
+		result.put("is_deleted", bookmarkBO.deleteBookMarkById(id));
 		return result;
 		
 	}

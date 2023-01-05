@@ -35,7 +35,7 @@
 						<td>${status.count}</td>
 						<td>${bookmark.name}</td>
 						<td>${bookmark.url}</td>
-						<td><button type="button" class="deleteBtn btn btn-danger">삭제</button></td>
+						<td><button type="button" class="deleteBtn btn btn-danger" value="${bookmark.id}">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -47,8 +47,22 @@
 		$(document).ready(function() {
 			
 			$('.deleteBtn').on("click", function() {
+				let id = $(this).val();
 				
-				alert();
+				$.ajax({
+					type:"post"
+					, url:"/lesson06/quiz02/is_deleted"
+					, data:{"id":id}
+				
+					, success:function(data) {
+						if (data.is_deleted) {
+							document.location.reload();
+						}
+					}
+					, error:function(e) {
+						alert("실패" + e);
+					}
+				})
 				
 			});
 			
