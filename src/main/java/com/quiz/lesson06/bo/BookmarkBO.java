@@ -26,7 +26,11 @@ public class BookmarkBO {
 		return bookmarkDAO.existBookmarkByUrl(url);
 	}
 	
-	public boolean deleteBookMarkById(int id) {
+//	public boolean deleteBookMarkById(int id) {
+//		return bookmarkDAO.deleteBookMarkById(id);
+//	}
+	
+	public int deleteBookMarkById(int id) {
 		return bookmarkDAO.deleteBookMarkById(id);
 	}
 	

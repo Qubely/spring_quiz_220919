@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,7 +56,7 @@ public class Lesson06QuizController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/quiz02/is_duplication")
+	@PostMapping("/quiz02/is_duplication")
 	public Map<String, Boolean> isDuplication(
 			@RequestParam("url") String url
 			) {
@@ -67,13 +68,24 @@ public class Lesson06QuizController {
 	}
 	
 	@ResponseBody
-	@PostMapping("quiz02/is_deleted")
-	public Map<String, Boolean> isDeleted(
+	@DeleteMapping("quiz02/is_deleted")
+	public Map<String, Object> isDeleted(
 			@RequestParam("id") int id
 			) {
 		
-		Map<String, Boolean> result = new HashMap<>();
-		result.put("is_deleted", bookmarkBO.deleteBookMarkById(id));
+		Map<String, Object> result = new HashMap<>();
+		int row = bookmarkBO.deleteBookMarkById(id);
+		if (row > 0) {
+			result.put("code", 1);
+			result.put("result", "성공");
+		} else {
+			result.put("code", 500);
+			result.put("result", "실패");
+			result.put("error_message", "삭제된 행이 없습니다.");
+		}
+		
+		
+//		result.put("is_deleted", bookmarkBO.deleteBookMarkById(id));
 		return result;
 		
 	}

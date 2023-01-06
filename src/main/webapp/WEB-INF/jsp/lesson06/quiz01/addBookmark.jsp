@@ -24,8 +24,8 @@
 		<div class="form-group">
 			<label for="url">주소</label>
 			<div class="d-flex">
-				<input type="text" id="url" name="url" class="form-control col-11">
-				<button type="button" id="urlCheckBtn" class="btn btn-info ml-2">중복확인</button>
+				<input type="text" id="url" name="url" class="form-control">
+				<button type="button" id="urlCheckBtn" class="btn btn-info ml-1">중복확인</button>
 			</div>
 			<small id="urlStatusArea"></small>
 		</div>
@@ -76,7 +76,7 @@
 				
 			});
 			
-			
+			// 중복확인
 			$('#urlCheckBtn').on("click", function() {
 				let url = $('#url').val().trim();
 				
@@ -94,7 +94,7 @@
 				
 				$.ajax({
 					// request
-					type:"get"
+					type:"post"
 					, url:"/lesson06/quiz02/is_duplication"
 					, data:{"url":url}
 					
@@ -107,7 +107,7 @@
 						}
 					}
 					, error:function(e) {
-						alert("실패" + e);
+						alert("에러" + e);
 					}
 					
 				});

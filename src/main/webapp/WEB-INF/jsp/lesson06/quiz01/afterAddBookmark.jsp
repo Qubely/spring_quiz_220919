@@ -35,7 +35,13 @@
 						<td>${status.count}</td>
 						<td>${bookmark.name}</td>
 						<td>${bookmark.url}</td>
-						<td><button type="button" class="deleteBtn btn btn-danger" value="${bookmark.id}">삭제</button></td>
+						<td>
+							<%-- 1. name속성, value속성 삭제 --%>
+							<%-- <button type="button" class="deleteBtn btn btn-danger" value="${bookmark.id}">삭제</button> --%>
+							
+							<%-- 2. data를 이용해서 태그에 임시 저장하기 --%>
+							<button type="button" class="deleteBtn btn btn-danger" data-bookmark-id="${bookmark.id}">삭제</button>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -46,21 +52,33 @@
 		
 		$(document).ready(function() {
 			
-			$('.deleteBtn').on("click", function() {
-				let id = $(this).val();
+			// 1. name속성, value속성 삭제
+			/* $('.deleteBtn').on("click", function() {
+				// let id = $(this).val();
+				// let id = $(this).attr("value");
+				// let id = e.target.value;
+			}); */
+			
+			// 2. data를 이용해서 태그에 임시 저장하기
+			// 태그 : data-bookmark-id	data- 뒤에 우리가 이름을 정한다.(대문자 절대 안됨)
+			// 스크립트 : $(this).data('bookmark-id')
+			$(".deleteBtn").on("click", function() {
+				let id = $(this).data('bookmark-id');
 				
 				$.ajax({
-					type:"post"
+					type:"delete"
 					, url:"/lesson06/quiz02/is_deleted"
 					, data:{"id":id}
 				
 					, success:function(data) {
-						if (data.is_deleted) {
-							document.location.reload();
+						if (data.code == 1) {
+							document.location.reload(true);
+						} else if (data.code == 500) {
+							alert(data.error_message);
 						}
 					}
 					, error:function(e) {
-						alert("실패" + e);
+						alert("에러" + e);
 					}
 				})
 				
