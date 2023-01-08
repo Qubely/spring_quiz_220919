@@ -18,4 +18,11 @@ public class BookingBO {
 		return bookingDAO.selectBookingList();
 	}
 	
+	public int deleteBookingById(int id) {
+		return bookingDAO.deleteBookingById(id);
+	}
+	
+	public void addBooking(String name, String date, int day, int headcount, String phoneNumber, String state) {
+		bookingDAO.insertBooking(name, date, day, headcount, phoneNumber, state);
+	}
 }

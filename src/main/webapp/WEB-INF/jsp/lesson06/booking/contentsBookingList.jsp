@@ -38,7 +38,7 @@
 								</c:choose>
 							</td>
 							<td>
-								<button type="button" class="deleteBtn btn btn-danger text-white" value="${booking.id}">삭제</button>
+								<button type="button" class="deleteBtn btn btn-danger text-white" data-booking-id="${booking.id}">삭제</button>
 							</td>
 						</tr>
 					</c:forEach>

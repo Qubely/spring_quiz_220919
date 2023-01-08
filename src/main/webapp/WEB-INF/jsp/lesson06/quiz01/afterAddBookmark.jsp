@@ -80,7 +80,7 @@
 					, error:function(e) {
 						alert("에러" + e);
 					}
-				})
+				});
 				
 			});
 			

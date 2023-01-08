@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
  <mapper namespace="com.quiz.lesson06.dao.BookingDAO">
  	<select id="selectBookingList" resultType="com.quiz.lesson06.model.Booking">
  		SELECT
@@ -16,4 +17,35 @@
 		FROM
 			`booking`
  	</select>
+ 	
+ 	<delete id="deleteBookingById" parameterType="int">
+ 		DELETE FROM `booking`
+ 		WHERE
+ 			`id` = #{id}
+ 	</delete>
+ 	
+ 	<insert id="insertBooking" parameterType="map">
+ 		INSERT INTO `booking`
+ 		(
+ 			`name`
+			, `date`
+			, `day`
+			, `headcount`
+			, `phoneNumber`
+			, `state`
+			, `createdAt`
+			, `updatedAt
+ 		)
+ 		VALUES
+ 		(
+ 			#{name}
+ 			, #{date}
+ 			, #{day}
+ 			, #{headcount}
+ 			, #{phoneNumber}
+ 			, #{state}
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
  </mapper>
