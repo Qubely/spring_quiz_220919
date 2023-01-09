@@ -27,7 +27,7 @@ public class BookingController {
 	// http://localhost:8080/booking/main_view
 	@GetMapping("/main_view")
 	public String mainView() {
-		return "lesson06/booking/main";
+		return "lesson06/booking/mainView";
 	}
 	
 	// http://localhost:8080/booking/booking_list_view
@@ -49,7 +49,7 @@ public class BookingController {
 		int row = bookingBO.deleteBookingById(id);
 		if (row > 0) {
 			result.put("code", 1);
-			result.put("result", "성공");
+			result.put("result", "삭제 성공");
 		} else {
 			result.put("code", 500);
 			result.put("result", "실패");
@@ -74,26 +74,46 @@ public class BookingController {
 			, @RequestParam("day") int day
 			, @RequestParam("headcount") int headcount
 			, @RequestParam("phoneNumber") String phoneNumber
-			, @RequestParam("state") String state
 			) {
-//		int row = bookingBO.addBooking(name, date, day, headcount, phoneNumber, state);
-		bookingBO.addBooking(name, date, day, headcount, phoneNumber, state);
+		int row = bookingBO.addBooking(name, date, day, headcount, phoneNumber);
+//		bookingBO.addBooking(name, date, day, headcount, phoneNumber, state);
 		
 		Map<String, Object> result = new HashMap<>();
-		result.put("code", 1);
-		result.put("result", "예약이 완료되었습니다.");
-//		if (row > 0) {
-//			result.put("code", 1);
-//			result.put("result", "성공");
-//		} else {
-//			result.put("code", 501);
-//			result.put("result", "실패");
-//			result.put("error_message", "추가된 행이 없습니다.");
-//		}
+//		result.put("code", 1);
+//		result.put("result", "예약이 완료되었습니다.");
+		if (row > 0) {
+			result.put("code", 1);
+			result.put("result", "예약 되었습니다.");
+		} else {
+			result.put("code", 501);
+			result.put("result", "실패");
+			result.put("error_message", "추가된 행이 없습니다.");
+	}
 		
 		return result;
 	}
 	
+	
+	@ResponseBody
+	@PostMapping("/reservation_check")
+	public Map<String, Object> getBookingByNamePhoneNumber(
+			@RequestParam("name") String name
+			, @RequestParam("phoneNumber") String phoneNumber) {
+		
+		Booking booking = bookingBO.getLatestBookingByNamePhoneNumber(name, phoneNumber);
+		
+		Map<String, Object> result = new HashMap<>();
+		if (booking != null) {
+			result.put("code", 1);
+			result.put("result", booking);
+		} else {
+			result.put("code", 502);
+			result.put("result", "실패");
+			result.put("error_message", "일치하는 내역이 없습니다.");
+		}
+		
+		return result;
+	}
 	
 	
 }

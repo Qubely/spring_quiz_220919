@@ -27,7 +27,7 @@
 		</div>
 
 		<div class="text-right mt-3 mr-3">
-			<button type="button" class="btn btn-success submit-btn">조회하기</button>
+			<button type="button" id="submitBtn" class="btn btn-success submit-btn">조회하기</button>
 		</div>
 	</div>
 </section>

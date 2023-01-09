@@ -40,5 +40,56 @@
 		</footer>
 	</div>
 	
+	<script>
+		$(document).ready(function() {
+			
+			
+			
+			$('#submitBtn').on("click", function() {
+				let name = $('#name').val().trim();
+				let phoneNumber = $('#phoneNumber').val().trim();
+				
+				if (name.length == "") {
+					alert("이름을 입력해 주세요.");
+					return;
+				}
+				if (phoneNumber.length == "") {
+					alert("전화번호를 입력하세요.");
+					return;
+				}
+				if (phoneNumber.length > 13 || phoneNumber.length < 13) {
+					alert("전화번호는 xxx-xxxx-xxxx형식으로 입력하세요.");
+					return;
+				}
+				if (!phoneNumber.includes('-')) {
+					alert("전화번호는 xxx-xxxx-xxxx형식으로 입력하세요.");
+					return;
+				}
+				
+				$.ajax({
+					type:"post"
+					, url:"/booking/reservation_check"
+					, data:{"name":name, "phoneNumber":phoneNumber}
+				
+					, success:function(data) {
+						if (data.code == 1) {
+							// 예약날짜가 Date 타입일 때 잘라내기
+							// data.result.date.slice(0, 10)
+							alert("이름 : " + data.result.name + "\n날짜 : " + data.result.date
+									+ "\n일수 : " + data.result.day + "\n인원 : " + data.result.headcount
+									+ "\n상태 : " + data.result.state);
+							
+						} else if (data.code == 502) {
+							alert(data.error_message);
+						}
+					}
+					, error:function(e) {
+						alert("조회 실패");
+					}
+					
+				});
+			});
+		});
+	</script>
 </body>
 </html>

@@ -22,7 +22,11 @@ public class BookingBO {
 		return bookingDAO.deleteBookingById(id);
 	}
 	
-	public void addBooking(String name, String date, int day, int headcount, String phoneNumber, String state) {
-		bookingDAO.insertBooking(name, date, day, headcount, phoneNumber, state);
+	public int addBooking(String name, String date, int day, int headcount, String phoneNumber) {
+		return bookingDAO.insertBooking(name, date, day, headcount, phoneNumber);
+	}
+	
+	public Booking getLatestBookingByNamePhoneNumber(String name, String phoneNumber) {
+		return bookingDAO.selectLatestBookingByNamePhoneNumber(name, phoneNumber);
 	}
 }
